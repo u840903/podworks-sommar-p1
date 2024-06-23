@@ -1,8 +1,6 @@
 
 // Export a default object containing event handlers
 export default {
-  // The fetch handler is invoked when this worker receives a HTTP(S) request
-  // and should return a Response (optionally wrapped in a Promise)
   async fetch(request, env, ctx) {
 
     let response = await fetch("https://api.sr.se/api/v2/episodes/index?programid=2071&fromdate=2023-01-01&todate=2024-12-31&audioquality=hi&format=json", {
@@ -35,7 +33,7 @@ function generateRssXml(data) {
     const description = encodeHtmlEntities(episode.description)
 
     return `
-    <item> 
+    <item>
       <title>${title}</title>
       <description>${description}</description>
       <duration>${episode.listenpodfile.duration}</duration>
@@ -53,7 +51,7 @@ function generateRssXml(data) {
   <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
   xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:sr="http://www.sverigesradio.se/podrss" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
-  <channel>  
+  <channel>
   <itunes:new-feed-url>https://api.sr.se/api/rss/pod/itunes/4023</itunes:new-feed-url>
     <atom:link href="https://api.sr.se/api/rss/pod/itunes/4023" rel="self" type="application/rss+xml"/>
     <lastBuildDate>Sun, 23 Jun 2024 09:05:48 GMT</lastBuildDate>
@@ -82,7 +80,7 @@ function generateRssXml(data) {
     </description>
     <language>sv</language>
     <copyright>Copyright Sveriges Radio 2024. All rights reserved.</copyright>
-    ${items}  
+    ${items}
     </channel>
     </rss>
   `;
@@ -91,7 +89,7 @@ function generateRssXml(data) {
 function convertToDate(dateString) {
   // Use a regular expression to extract the timestamp
   const timestampMatch = /\/Date\((\d+)\)\//.exec(dateString);
-  
+
   if (timestampMatch) {
     const timestamp = parseInt(timestampMatch[1], 10);
     return new Date(timestamp);
