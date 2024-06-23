@@ -1,0 +1,9 @@
+name = "sommar"
+main = "src/worker.js"
+compatibility_date = "2024-06-23"
+workers_dev = true
+
+[[routes]]
+pattern = "sommar.u840903.com"
+zone_name = "u840903.com"
+custom_domain = true
